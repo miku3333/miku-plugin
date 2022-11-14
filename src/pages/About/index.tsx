@@ -7,7 +7,7 @@ import './style.less';
 const About = () => {
     return (
         <div className="about">
-            <a href="https://github.com/miku3333/ncm-plugin" className="github">
+            <a target="_blank" href="https://github.com/miku3333/ncm-plugin" className="github">
                 <GithubOutlined />
                 有想要的功能欢迎来提Issue, 顺便点个star
             </a>
@@ -16,7 +16,6 @@ const About = () => {
             <Checkbox defaultChecked disabled>点击cd唱头时播放/暂停</Checkbox>
             <Checkbox defaultChecked disabled>cd可以转动</Checkbox>
             <div className="title">将要做的功能</div>
-            <div>...</div>
         </div>
     );
 };

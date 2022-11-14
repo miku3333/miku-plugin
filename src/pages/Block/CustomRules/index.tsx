@@ -10,7 +10,7 @@ const CustomRules = ({setCustomRules}: {setCustomRules: (str: string) => void}) 
     }
     return (
         <div>
-            <a className='article' href="https://www.jianshu.com/p/99173afa8800?utm_campaign=maleskine...&utm_content=note&utm_medium=seo_notes">自己写css选择器, 按行分隔, 每行的"/"及其后面内容会被识别为注释, 不会的可以查看这个链接</a>
+            <a className='article' target="_blank" href="https://www.jianshu.com/p/99173afa8800?utm_campaign=maleskine...&utm_content=note&utm_medium=seo_notes">自己写css选择器, 按行分隔, 每行的"/"及其后面内容会被识别为注释, 不会的可以查看这个链接</a>
             <div id='train'>试试清除这行文字以及下面的顶针和丽丽吧!</div>
             <img
                 className='YiGeLiNaMi'
