@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { btnClick } from './utils';
 
 plugin.onAllPluginsLoaded(async function (plugins) {
-    await plugins.StylesheetLoader.loadStylesheet(plugin, this.pluginPath + '/index.css', 'miku-plugin', {});
+    await plugins.StylesheetLoader.loadStylesheet(plugin, this.pluginPath + '/main-prod.css', 'miku-plugin', {});
 });
 
 // 点击cd唱头时播放/暂停
@@ -50,6 +50,7 @@ betterncm.utils.waitForElement('.cdrun').then(() => {
 //     };
 //     targetBtn.addEventListener('click', targetClick, true);
 // });
+
 // cd可以转动
 betterncm.utils.waitForElement('.cdwrap').then(() => {
     const cd = document.querySelector('.cdwrap');
@@ -98,8 +99,6 @@ betterncm.utils.waitForElement('.cdwrap').then(() => {
 
 });
 
-
-
 betterncm.utils.waitForElement('.g-mn').then(() => {
     const reactRoot:HTMLDivElement = document.querySelector('#root') || document.createElement('div');
     reactRoot.id = 'root';
@@ -122,11 +121,3 @@ betterncm.utils.waitForElement('.g-mn').then(() => {
         </React.StrictMode>
     );
 })
-
-// ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
-//     <React.StrictMode>
-//         <BrowserRouter>
-//             <App />
-//         </BrowserRouter>
-//     </React.StrictMode>
-// );

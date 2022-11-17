@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
+    "serve": "vite",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -12,12 +14,14 @@
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.24.2",
     "react": "^18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "vite-plugin-imp": "^2.3.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.24",
+    "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "less": "^4.1.3",

@@ -26,11 +26,13 @@ export default defineConfig({
     build: {
         outDir: '../test',
         rollupOptions: {
+            input: 'src/main-prod.tsx',
             output: {
                 entryFileNames: `[name].js`,
                 chunkFileNames: `[name].js`,
-                assetFileNames: `[name].[ext]`
-            }
+                assetFileNames: `[name].[ext]`,
+                format: 'umd'
+            },
         }
     }
 });

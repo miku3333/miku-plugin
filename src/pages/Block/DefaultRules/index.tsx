@@ -19,6 +19,10 @@ const bottom = [
     { label: '一起听', value: '.listenTogether' },
     { label: '播放列表', value: '.list.f-vc.f-cp' },
     { label: '全屏', value: '.playfull' },
+    { label: '喜欢', value: '.btn-love' },
+    { label: '收藏', value: '.btn-fav' },
+    { label: '下载', value: '.btn-dld' },
+    { label: '分享', value: '.btn-share' },
 ]
 const side = [
     { label: '发现', value: '[data-id="/m/disc/"]' },
@@ -46,14 +50,29 @@ const find = [
     { label: '听听', value: '[data-nej-selector*=__nVoiceLive]' },
     { label: '看看', value: '[data-nej-selector*=__nVoiceLive]' },
     { label: '调整顺序', value: '.m-adjustbar' },
+    { label: '最小化', value: '.min' },
+    { label: '最大化', value: '.max' },
 ]
 const cd = [
     { label: '直播广告', value: '.g-singlec-live' },
+    { label: 'mv标签', value: '.tag-wrap' },
     { label: '评论+推荐', value: '.g-bd2.f-cb' },
     { label: '评论', value: '.g-mn2.j-flag' },
     { label: '推荐', value: '.g-sd2.recommend.j-flag' },
     { label: '发评论', value: '.g-singlec-comment-detail' },
     { label: '返回顶部', value: '.g-singlec-comment-top' },
+]
+const list = [
+    { label: '创建者', value: '.m-info .user' },
+    { label: '按钮区', value: '.m-info .btns' },
+    { label: '喜欢', value: '.u-micn-loved' },
+    { label: '下载', value: '.u-micn-dld' },
+    { label: '已下载', value: '.u-icn-dld_ok' },
+    { label: 'SQ', value: '.u-micn-sq' },
+    { label: 'Hi-Res', value: '.SpriteIcon_hires' },
+    { label: '试听', value: '.u-micn-try' },
+    { label: 'mv标签', value: '.u-micn-mv' },
+    { label: 'VIP', value: '.u-micn-vip' },
 ]
 
 const DefaultRules = ({setDefaultRules}: {setDefaultRules: (strs: string[]) => void}) => {
@@ -68,7 +87,7 @@ const DefaultRules = ({setDefaultRules}: {setDefaultRules: (strs: string[]) => v
                 <div className="rules">
                     {
                         config.map(({ label, value }) => (
-                            <Checkbox value={value}>{label}</Checkbox>
+                            <Checkbox key={label + value} value={value}>{label}</Checkbox>
                         ))
                     }
                 </div>
@@ -85,6 +104,7 @@ const DefaultRules = ({setDefaultRules}: {setDefaultRules: (strs: string[]) => v
             {getCheckBoxes(side, '侧边栏')}
             {getCheckBoxes(find, '发现音乐')}
             {getCheckBoxes(cd, 'cd页')}
+            {getCheckBoxes(list, '歌单页')}
         </Checkbox.Group>
     );
 };

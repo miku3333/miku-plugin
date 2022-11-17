@@ -15,6 +15,8 @@ const About = () => {
             <Checkbox defaultChecked disabled>禁用不想要的组件</Checkbox>
             <Checkbox defaultChecked disabled>点击cd唱头时播放/暂停</Checkbox>
             <Checkbox defaultChecked disabled>cd可以转动</Checkbox>
+            <Checkbox defaultChecked disabled>自定义字体</Checkbox>
+            <Checkbox defaultChecked disabled>自定义颜色</Checkbox>
             <div className="title">将要做的功能</div>
         </div>
     );
