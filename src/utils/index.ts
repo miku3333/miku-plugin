@@ -1,3 +1,5 @@
+import { PERFIX } from "../constant";
+
 let display = false;
 // @ts-ignore
 export const btnClick = () => {

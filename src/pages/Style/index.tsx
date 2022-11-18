@@ -1,5 +1,5 @@
-import { Form, Input } from 'antd';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { Form, Input, Select } from 'antd';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PERFIX } from '../../constant';
 import { SketchPicker, ColorResult } from 'react-color';
 import { BgColorsOutlined } from '@ant-design/icons';
@@ -37,6 +37,26 @@ const Style = () => {
         styleSheet.current.innerHTML = `*{${styleInner}}`;
     }, []);
 
+    const [fonts, setFonts] = useState<string[]>(JSON.parse(localStorage.getItem(`${PERFIX}-fonts`) || '[]'));
+    const fontOptions = useMemo(() => fonts.map(item => ({ value: item, label: item })), [fonts]);
+    const updateFonts = useCallback(() => {
+        const clickE = document.createEvent('MouseEvents');
+        clickE.initEvent('click', true, true);
+        document.querySelector('.itm.itm2.set')!.dispatchEvent(clickE);
+        const timeOut = setTimeout(() => {
+            clearTimeout(timeOut);
+            // @ts-ignore
+            const fonts = [...document.querySelector('.u-select-fonts').querySelector('.select').children].map(item => item.innerText)
+            // 删除默认字体
+            fonts.shift();
+            localStorage.setItem(`${PERFIX}-fonts`, JSON.stringify(fonts));
+            setFonts(fonts);
+        }, 500)
+    }, []);
+    useEffect(() => {
+        updateFonts();
+    }, []);
+
     const [formValue, setFormValue] = useState({});
     const [form] = Form.useForm();
     const formChange = useCallback((_: any, allValues: any) => {
@@ -57,14 +77,22 @@ const Style = () => {
     const [pickerColor, setPickerColor] = useState('');
     const pickerColorChange = useCallback((color: ColorResult) => {
         setPickerColor(color.hex);
-        setFormValue({ ...formChange, color: color.hex });
-    }, []);
+        setFormValue({ ...formValue, color: color.hex });
+    }, [formValue]);
 
     return (
         <div>
             <Form form={form} labelCol={{ span: 2 }} initialValues={initialValues} onValuesChange={formChange}>
                 <Item key='font-family' name='font-family' label='字体'>
-                    <Input allowClear placeholder='字体的中文名或英文名' />
+                    <Select
+                        showSearch
+                        allowClear
+                        placeholder="字体的中文名或英文名"
+                        filterOption={(input, option) =>
+                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                        }
+                        options={fontOptions}
+                    />
                 </Item>
                 <Item key='color' name='color' label='字体颜色'>
                     <Input.Search

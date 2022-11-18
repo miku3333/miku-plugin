@@ -2,10 +2,11 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import vitePluginImp from 'vite-plugin-imp';
 import { LessPluginRemoveAntdGlobalStyles } from 'less-plugin-remove-antd-global-styles'
+import { swcReactRefresh } from 'vite-plugin-swc-react-refresh'
 
 export default defineConfig({
     plugins: [
-        react(),
+        swcReactRefresh(),
         vitePluginImp({
             libList: [
                 {
@@ -15,6 +16,9 @@ export default defineConfig({
             ]
         })
     ],
+    esbuild: {
+        jsx: 'automatic'
+    },
     css: {
         preprocessorOptions: {
             less: {
