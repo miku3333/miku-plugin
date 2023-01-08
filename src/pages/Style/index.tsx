@@ -20,19 +20,6 @@ const STYLE_CONFIG = [
 ];
 
 const Style = () => {
-    // const styleSheet = useRef<HTMLStyleElement | null>(styleDom);
-    // useEffect(() => {
-    //     const style = document.createElement('style');
-    //     style.setAttribute('type', 'text/css');
-    //     styleSheet.current = document.head.appendChild(style);
-    //     let styleInner = '';
-    //     STYLE_CONFIG.forEach(({ name }) => {
-    //         const value = localStorage.getItem(`${PERFIX}-${name}`) || '';
-    //         styleInner += `${name}: ${value} !important;`;
-    //     });
-    //     styleSheet.current.innerHTML = `*{${styleInner}}`;
-    //     styleDom?.remove();
-    // }, []);
     const initialValues = useRef(STYLE_CONFIG.reduce((pre: { [key: string]: any }, { name }) => {
         pre[name] = localStorage.getItem(`${PERFIX}-${name}`) || '';
         return pre;
@@ -58,7 +45,7 @@ const Style = () => {
         !IS_DEV && updateFonts();
     }, []);
 
-    const [formValue, setFormValue] = useState({});
+    const [formValue, setFormValue] = useState(initialValues.current);
     const [form] = Form.useForm();
     const formChange = useCallback((_: any, allValues: any) => {
         setFormValue(allValues);
@@ -85,7 +72,7 @@ const Style = () => {
 
     const [pickerVisable, setPickerVisable] = useState(false);
     const changePickerVisable = useCallback(() => setPickerVisable(pickerVisable => !pickerVisable), []);
-    const [pickerColor, setPickerColor] = useState('');
+    const [pickerColor, setPickerColor] = useState(localStorage.getItem(`${PERFIX}-color`) || '');
     const pickerColorChange = useCallback((color: ColorResult) => {
         setPickerColor(color.hex);
         setFormValue({ ...formValue, color: color.hex });
