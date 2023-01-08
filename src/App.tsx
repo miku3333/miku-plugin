@@ -7,7 +7,7 @@ import Block from './pages/Block';
 import About from './pages/About';
 import { btnClick } from './utils';
 import Style from './pages/Style';
-import { PERFIX } from './constant';
+import { PERFIX, setStyleDom, styleDom } from './constant';
 
 const { Sider } = Layout;
 
@@ -45,7 +45,9 @@ function App() {
         const style = document.createElement('style');
         style.setAttribute('type', 'text/css');
         const styleSheet = document.head.appendChild(style);
+        setStyleDom(styleSheet);
         let styleInner = '';
+        let placeholder = '';
         [
             {
                 label: '字体',
@@ -60,8 +62,12 @@ function App() {
         ].forEach(({ name }) => {
             const value = localStorage.getItem(`${PERFIX}-${name}`) || '';
             styleInner += `${name}: ${value} !important;`;
+            if (name === 'color') {
+                styleInner += `fill: ${value} !important;`
+                placeholder = `input::placeholder{color: ${value} !important;}`
+            }
         });
-        styleSheet.innerHTML = `*{${styleInner}}`;
+        styleSheet.innerHTML = `*{${styleInner}}${placeholder}`;
     }, []);
 
     return (

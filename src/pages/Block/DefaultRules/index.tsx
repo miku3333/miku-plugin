@@ -10,6 +10,14 @@ const top = [
     { label: 'VIP', value: '.tovip' },
     { label: '消息', value: '.itm.itm2.msg.j-flag' },
     { label: 'mini模式', value: '.icn.fix' },
+    { label: '前进', value: '.btn-prv' },
+    { label: '后退', value: '.btn-nxt' },
+    { label: '搜索', value: '.m-sch' },
+    { label: '最小化', value: '.min' },
+    { label: '最大化', value: '.max' },
+    { label: '设置', value: '.itm.itm2.set' },
+    { label: '设置右侧细线', value: '.m-leftbox::after' },
+    { label: '关闭按钮', value: '.m-winctrl' },
 ]
 const bottom = [
     { label: '播放顺序', value: '.type.f-cp' },
@@ -23,6 +31,12 @@ const bottom = [
     { label: '收藏', value: '.btn-fav' },
     { label: '下载', value: '.btn-dld' },
     { label: '分享', value: '.btn-share' },
+    { label: '音量', value: '.spk.f-vc.f-cp.j-vol'},
+    { label: '右下角标', value: '.u-resize'},
+    { label: '喜欢/取消喜欢', value: '.icn.f-flin'},
+    { label: '封面bar', value: '.m-pinfo'},
+    { label: '封面bar-歌名', value: '.bar .f-oh'},
+    { label: '封面bar-歌手', value: '.bar p'},
 ]
 const side = [
     { label: '发现', value: '[data-id="/m/disc/"]' },
@@ -31,6 +45,8 @@ const side = [
     { label: '关注', value: '.j-friend-entrant' },
     { label: '直播', value: '.look.j-flag' },
     { label: 'FM', value: '.fm.j-flag' },
+    { label: '我的音乐', value: '.nav > h2' },
+    { label: '我喜欢的音乐', value: '#my-music-list' },
     { label: '本地', value: '[data-id="/m/offline/"]' },
     { label: '最近', value: '[data-id="/m/history/"]' },
     { label: '云盘', value: '.cloud.j-flag' },
@@ -48,10 +64,8 @@ const find = [
     { label: '主题播客', value: '[data-nej-selector=__nThemePodcastContainer]' },
     { label: '推荐MV', value: '[data-nej-selector*=__nRecMV]' },
     { label: '听听', value: '[data-nej-selector*=__nVoiceLive]' },
-    { label: '看看', value: '[data-nej-selector*=__nVoiceLive]' },
+    { label: '看看', value: '[data-nej-selector*=__nLive]' },
     { label: '调整顺序', value: '.m-adjustbar' },
-    { label: '最小化', value: '.min' },
-    { label: '最大化', value: '.max' },
 ]
 const cd = [
     { label: '直播广告', value: '.g-singlec-live' },
@@ -61,6 +75,8 @@ const cd = [
     { label: '推荐', value: '.g-sd2.recommend.j-flag' },
     { label: '发评论', value: '.g-singlec-comment-detail' },
     { label: '返回顶部', value: '.g-singlec-comment-top' },
+    { label: '歌词操作栏', value: '.side-operators' },
+    { label: '歌词弹幕', value: '.sc-fzoVTD' },
 ]
 const list = [
     { label: '创建者', value: '.m-info .user' },
@@ -73,6 +89,17 @@ const list = [
     { label: '试听', value: '.u-micn-try' },
     { label: 'mv标签', value: '.u-micn-mv' },
     { label: 'VIP', value: '.u-micn-vip' },
+    { label: '横幅广告', value: '#newts_node' },
+    { label: '歌曲列表上侧', value: '.g-wrap0' },
+    { label: '歌曲列表一排', value: '.u-tab2' },
+    { label: '歌曲列表', value: '[data-id="/m/playlist/"]' },
+    { label: '评论', value: '[data-id="/m/playlist/comment/"]' },
+    { label: '收藏', value: '[data-id="/m/playlist/fav/"]' },
+    { label: '搜索', value: '.m-lstoper' },
+    { label: '操作', value: '.head .fix' },
+]
+const pluginManage = [
+    { label: '插件管理', value: '.pluginManage' },
 ]
 
 const DefaultRules = ({setDefaultRules}: {setDefaultRules: (strs: string[]) => void}) => {
@@ -105,6 +132,7 @@ const DefaultRules = ({setDefaultRules}: {setDefaultRules: (strs: string[]) => v
             {getCheckBoxes(find, '发现音乐')}
             {getCheckBoxes(cd, 'cd页')}
             {getCheckBoxes(list, '歌单页')}
+            {getCheckBoxes(pluginManage, '插件管理(关闭后鼠标移入侧边栏显示插件管理)')}
         </Checkbox.Group>
     );
 };

@@ -1,6 +1,6 @@
 import { Form, Input, Select } from 'antd';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PERFIX } from '../../constant';
+import { IS_DEV, PERFIX, setStyleDomContent } from '../../constant';
 import { SketchPicker, ColorResult } from 'react-color';
 import { BgColorsOutlined } from '@ant-design/icons';
 import "./style.less"
@@ -18,24 +18,25 @@ const STYLE_CONFIG = [
         placeholder: '16进制#39c5bb[cc](中括号内为透明度, 可选)或rgb(57, 197, 187)或rgba(57, 197, 187, 0.8)'
     }
 ];
-const initialValues = STYLE_CONFIG.reduce((pre: { [key: string]: any }, { name }) => {
-    pre[name] = localStorage.getItem(`${PERFIX}-${name}`) || '';
-    return pre;
-}, {});
 
 const Style = () => {
-    const styleSheet = useRef<any>(null);
-    useEffect(() => {
-        const style = document.createElement('style');
-        style.setAttribute('type', 'text/css');
-        styleSheet.current = document.head.appendChild(style);
-        let styleInner = '';
-        STYLE_CONFIG.forEach(({ name }) => {
-            const value = localStorage.getItem(`${PERFIX}-${name}`) || '';
-            styleInner += `${name}: ${value} !important;`;
-        });
-        styleSheet.current.innerHTML = `*{${styleInner}}`;
-    }, []);
+    // const styleSheet = useRef<HTMLStyleElement | null>(styleDom);
+    // useEffect(() => {
+    //     const style = document.createElement('style');
+    //     style.setAttribute('type', 'text/css');
+    //     styleSheet.current = document.head.appendChild(style);
+    //     let styleInner = '';
+    //     STYLE_CONFIG.forEach(({ name }) => {
+    //         const value = localStorage.getItem(`${PERFIX}-${name}`) || '';
+    //         styleInner += `${name}: ${value} !important;`;
+    //     });
+    //     styleSheet.current.innerHTML = `*{${styleInner}}`;
+    //     styleDom?.remove();
+    // }, []);
+    const initialValues = useRef(STYLE_CONFIG.reduce((pre: { [key: string]: any }, { name }) => {
+        pre[name] = localStorage.getItem(`${PERFIX}-${name}`) || '';
+        return pre;
+    }, {}));
 
     const [fonts, setFonts] = useState<string[]>(JSON.parse(localStorage.getItem(`${PERFIX}-fonts`) || '[]'));
     const fontOptions = useMemo(() => fonts.map(item => ({ value: item, label: item })), [fonts]);
@@ -54,22 +55,32 @@ const Style = () => {
         }, 500)
     }, []);
     useEffect(() => {
-        updateFonts();
+        !IS_DEV && updateFonts();
     }, []);
 
     const [formValue, setFormValue] = useState({});
     const [form] = Form.useForm();
     const formChange = useCallback((_: any, allValues: any) => {
         setFormValue(allValues);
+        setPickerColor(allValues.color);
     }, []);
+    const init = useRef(true);
     useEffect(() => {
-        let style = '';
-        Object.keys(formValue).forEach(name => {
-            const value = formValue[name as keyof typeof formValue];
-            localStorage.setItem(`${PERFIX}-${name}`, value);
-            style += `${name}: ${value} !important;`;
-        });
-        styleSheet.current.innerHTML = `*{${style}}`;
+        if (init.current) {
+            init.current = false
+        }
+        else {
+            let style = '';
+            Object.keys(formValue).forEach(name => {
+                const value = formValue[name as keyof typeof formValue];
+                localStorage.setItem(`${PERFIX}-${name}`, value);
+                style += `${name}: ${value} !important;`;
+                if (name === 'color') {
+                    style += `fill: ${value} !important;`
+                }
+            });
+            setStyleDomContent(`*{${style}}`)
+        }
     }, [formValue]);
 
     const [pickerVisable, setPickerVisable] = useState(false);
@@ -78,11 +89,12 @@ const Style = () => {
     const pickerColorChange = useCallback((color: ColorResult) => {
         setPickerColor(color.hex);
         setFormValue({ ...formValue, color: color.hex });
+        form.setFieldsValue({ ...formValue, color: color.hex })
     }, [formValue]);
 
     return (
         <div>
-            <Form form={form} labelCol={{ span: 2 }} initialValues={initialValues} onValuesChange={formChange}>
+            <Form form={form} labelCol={{ span: 2 }} initialValues={initialValues.current} onValuesChange={formChange}>
                 <Item key='font-family' name='font-family' label='字体'>
                     <Select
                         showSearch

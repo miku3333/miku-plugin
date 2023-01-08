@@ -20,7 +20,13 @@ const Block = () => {
         styleSheet.current = document.head.appendChild(style);
     }, []);
     useEffect(() => {
-        styleSheet.current.innerHTML = `${options.join(',')}{display: none !important}`;
+        const pluginManageIndex = options.indexOf('.pluginManage');
+        let pluginManageStyle = '';
+        if (pluginManageIndex !== -1) {
+            options.splice(pluginManageIndex, 1);
+            pluginManageStyle = '.pluginManage {height: 0; overflow: hidden; transition: all .3s;}'
+        }
+        styleSheet.current.innerHTML = `${pluginManageStyle}${options.join(',')}{display: none !important}`;
     }, [options]);
     return (
         <div>

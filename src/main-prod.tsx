@@ -108,7 +108,7 @@ betterncm.utils.waitForElement('.g-mn').then(() => {
 
     const sys = document.querySelector('.sys');
     const btn = sys!.appendChild(document.createElement('li'));
-    btn.className = 'fx j-flag fsection';
+    btn.className = 'fx j-flag fsection pluginManage';
     btn.appendChild(document.createElement('a'));
     
     btn.children[0].innerText = '插件管理';
