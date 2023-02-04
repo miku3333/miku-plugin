@@ -1,14 +1,9 @@
-import { PERFIX } from "../constant";
-
-let display = false;
 // @ts-ignore
 export const btnClick = () => {
     const root = document.querySelector('#root') as HTMLDivElement;
-    if (display) {
+    if (root.style.display === 'none') {
+        root.style.display = 'block';
+    } else {
         root.style.display = 'none';
     }
-    else {
-        root.style.display = 'block';
-    }
-    display = !display;
 }

@@ -91,13 +91,19 @@ const list = [
     { label: 'VIP', value: '.u-micn-vip' },
     { label: '横幅广告', value: '#newts_node' },
     { label: '歌曲列表上侧', value: '.g-wrap0' },
+    { label: '歌单封面', value: '.u-cover.u-cover-big' },
+    { label: '播放全部', value: '.btns .u-ibtn5b-new' },
+    { label: '收藏', value: '.btns .u-ibtn5.z-dis' },
+    { label: '分享', value: '.btns .u-ibtn5-share' },
+    { label: '下载', value: '.btns .u-ibtn5-dld' },
+    { label: '歌曲与播放数', value: '.mnum' },
     { label: '歌曲列表一排', value: '.u-tab2' },
     { label: '歌曲列表', value: '[data-id="/m/playlist/"]' },
     { label: '评论', value: '[data-id="/m/playlist/comment/"]' },
     { label: '收藏', value: '[data-id="/m/playlist/fav/"]' },
     { label: '搜索', value: '.m-lstoper' },
-    { label: '操作', value: '.head .fix' },
-]
+    { label: '操作', value: '.head .fix' }
+];
 const pluginManage = [
     { label: '插件管理', value: '.pluginManage' },
 ]

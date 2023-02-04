@@ -28,7 +28,7 @@ export default defineConfig({
         }
     },
     build: {
-        outDir: '../test',
+        outDir: '../dist',
         rollupOptions: {
             input: 'src/main-prod.tsx',
             output: {

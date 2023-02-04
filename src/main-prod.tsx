@@ -9,6 +9,7 @@ import './style/cd.less';
 import { BrowserRouter } from 'react-router-dom';
 import { btnClick } from './utils';
 
+
 plugin.onAllPluginsLoaded(async function (plugins) {
     await plugins.StylesheetLoader.loadStylesheet(plugin, this.pluginPath + '/main-prod.css', 'miku-plugin', {});
 });
@@ -106,13 +107,6 @@ betterncm.utils.waitForElement('.g-mn').then(() => {
     const root = document.body.appendChild(reactRoot);
     root.style.display = 'none'
 
-    const sys = document.querySelector('.sys');
-    const btn = sys!.appendChild(document.createElement('li'));
-    btn.className = 'fx j-flag fsection pluginManage';
-    btn.appendChild(document.createElement('a'));
-    
-    btn.children[0].innerText = '插件管理';
-    btn.addEventListener('click', btnClick);
     ReactDOM.createRoot(root as HTMLElement).render(
         <React.StrictMode>
             <BrowserRouter>
